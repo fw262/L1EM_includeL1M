@@ -42,8 +42,8 @@ def main():
 	read_ids = set()
 	for line in open(bedfile):
 		chrom,start,stop = line.strip().split('\t')[:3]
-		start = int(start)+flanking
-		stop = int(stop)-flanking
+		start = int(float(start))+flanking
+		stop = int(float(stop))-flanking
 		if chrom in inbam.references:
 			for read in inbam.fetch(chrom,start,stop):
 				if not read.is_unmapped:

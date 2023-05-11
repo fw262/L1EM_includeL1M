@@ -1,8 +1,4 @@
-# On Python2 import cPickle for performance improvement, else import pickle (available to both Py2 and Py3).
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
+import cPickle as pickle
 
 """
 Report the total numbr of read pairs passed to L1EM
@@ -26,8 +22,8 @@ Copyright (C) 2019 Wilson McKerrow
 
 total = 0
 for line in open('G_of_R_list.txt'):
-	G_of_R = pickle.load(open(line.strip(),'rb'))
+	G_of_R = pickle.load(open(line.strip()))
 	if G_of_R != None:
 		total += G_of_R.shape[0]
 
-print(total)
+print total

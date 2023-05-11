@@ -1,8 +1,4 @@
-# On Python2 import cPickle for performance improvement, else import pickle (available to both Py2 and Py3).
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
+import cPickle as pickle
 
 """
 Extract the estimate of proper transcription of L1HS elements.
@@ -26,17 +22,17 @@ Copyright (C) 2019 Wilson McKerrow
 
 total = 0
 for line in open('G_of_R_list.txt'):
-	G_of_R = pickle.load(open(line.strip(),'rb'))
+	G_of_R = pickle.load(open(line.strip()))
 	if G_of_R != None:
-		total += pickle.load(open(line.strip(),'rb')).shape[0]
+		total += pickle.load(open(line.strip())).shape[0]
 
-X_est = dict(zip(pickle.load(open('names_final.pkl','rb')),pickle.load(open('X_final.pkl','rb'))))
+X_est = dict(zip(pickle.load(open('names_final.pkl')),pickle.load(open('X_final.pkl'))))
 
 written_seqs = set([])
 
-print("family.category.locus.strand\sesne\tantisense")
+print "family.category.locus.strand\sesne\tantisense"
 
-names = list(X_est.keys())
+names = X_est.keys()
 
 for name in names:
 	if 'exon' not in name:
@@ -49,8 +45,8 @@ for name in names:
 		if sense_name not in X_est:
 			X_est[sense_name]=0.0
 		print_string += '\t'+str(total*X_est[sense_name])
-		antisense_name = seq_name+'_antisense'
+		antisense_name = seq_name+'_antisense'		
 		if antisense_name not in X_est:
 			X_est[antisense_name]=0.0
 		print_string += '\t'+str(total*X_est[antisense_name])
-		print(print_string)
+		print print_string
